@@ -222,5 +222,29 @@ public class MemberDao {
 		}
 		return ri;
 	}
-	
+	public int deleteMember(MemberDto dto) {
+		int ri = 0;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String query = "delete from members2 where id=?";
+		
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,  dto.getId());
+			ri = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return ri;
+	}
 }

@@ -70,7 +70,7 @@ function submit_ajax() {
 		메일 : <input type="text" id="eMail" name="eMail" size="20" value="<%= dto.geteMail() %>"><br>
 		주소 : <input type="text" id="address" name="address" size="50" value="<%= dto.getAddress() %>"><br>
 		<input type="button" value="수정" onclick="form_check()">&nbsp;&nbsp;&nbsp;
-		<input type="reset" value="취소" onclick="javascript:window.location='main.jsp'">
+		<input type="reset" value="취소" onclick="javascript:window.location='list.do'">
 	</form>
 </body>
 </html>
