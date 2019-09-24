@@ -48,21 +48,29 @@ function submit_ajax() {
 function onSignIn(googleUser) {
 	var profile = googleUser.getBasicProfile();
 	var queryString = "name=" + profile.getName();
-	$.ajax({
-		url: '/Project/LoginProcess',
-		type: 'POST',
-		data: queryString,
-		dataType: 'text',
-		success: function(json) {
-			var result = JSON.parse(json);
-			if (result.code=="success") {
-				alert(result.desc)
-				window.location.replace("list.do");
-			} else {
-				alert(result.desc)
-			}
-		}	
-	});
+	 $.ajax({
+			url: '/Project/LoginProcess',
+			type: 'POST',
+			data: queryString,
+			dataType: 'text',
+			success: function(json) {
+				var result = JSON.parse(json);
+				if (result.code=="success") {
+					alert(result.desc)
+					window.location.replace("list.do");
+					var auth2 = gapi.auth2.getAuthInstance();
+					auth2.signOut().then(function () {
+					console.log('User signed out.');
+					    
+					$('#login').css('display', 'block');
+					$('#logout').css('display', 'none');
+
+					    });
+				} else {
+					alert(result.desc);
+				}
+			}	
+		});
 }
 
 /* 페이스북 로그인 */

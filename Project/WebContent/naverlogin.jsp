@@ -39,7 +39,7 @@
 			{
 
 				clientId: "SDEPeKuQewHAm_bUWhJC",
-				callbackUrl: "http://localhost:8081/Project/list.jsp",
+				callbackUrl: "http://localhost:8081/Project/login.jsp",
 				isPopup: false,
 				loginButton: {color: "green", type: 3, height: 60}
 			}
@@ -64,8 +64,7 @@
 		/* (6) 로그인 상태가 "true" 인 경우 로그인 버튼을 없애고
 		   사용자 정보를 출력합니다. */
 		function setLoginStatus() {
-			var uName = naverLogin.user.getName();
-			var queryString = "name=" + uName;
+			var queryString = "name=" + naverLogin.user.getName();;
 			$.ajax({
 				url: '/Project/LoginProcess',
 				type: 'POST',
@@ -80,7 +79,7 @@
 						alert(result.desc);
 					}
 				}	
-			})
+			});
 		}
 	</script>
 

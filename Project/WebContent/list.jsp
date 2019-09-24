@@ -42,10 +42,15 @@
 
 </head>
 <body>
-
+<script>
+function logout(event) {
+    	event.preventDefault();
+    	location.href="logout.jsp";
+    };
+</script>
 	<h1><%= name %>님 안녕하세요.</h1> <br>
 	<form action="logout.jsp">
-		<input type="submit"  value="로그아웃">&nbsp;&nbsp;&nbsp;
+		<input type="submit"  value="로그아웃" onclick=logout(event)>&nbsp;&nbsp;&nbsp;
 		<input type="button" value="정보수정"
 			   onclick="javascript:window.location='modify.jsp'">&nbsp;
 		<input type="button" value="회원탈퇴" onclick="javascript:window.location='delete.jsp'">	   
