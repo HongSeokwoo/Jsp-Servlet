@@ -21,23 +21,26 @@ public class LoginProcess extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		
+		String name = null;
 		//여기서 일반로그인과 구글로그인을 구분 짓는다.
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-	
-		
-		
+		name = request.getParameter("name");
 		
 		MemberDao dao = MemberDao.getInstance();
 		MemberDto dto = new MemberDto();
-
-		String json_data = "";
 		int ri = dao.userCheck(id, pw);
-		if (ri == dao.MEMBER_JOIN_SUCCESS) {
+		String json_data = "";
+		if (name != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id);
+			session.setAttribute("name", name);
+			session.setAttribute("ValidMem", "yes");
+			json_data = "{\"code\":\"success\", \"desc\":\"로그인에 성공했습니다.\"}";
+		} else if (ri == dao.MEMBER_JOIN_SUCCESS) {
 			HttpSession session = request.getSession();
 			dto = dao.getMember(id);
-			String name = dto.getName();
+			name = dto.getName();
 			session.setAttribute("id", id);
 			session.setAttribute("name", name);
 			session.setAttribute("ValidMem", "yes");
@@ -47,7 +50,7 @@ public class LoginProcess extends HttpServlet {
 		} else if (ri == dao.MEMBER_LOGIN_PW_NO_GOOD) {
 			json_data = "{\"code\":\"fail\", \"desc\":\"패스워드가 틀립니다.\"}";
 		} 
-			
+		
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter writer = response.getWriter();
 		writer.println(json_data);

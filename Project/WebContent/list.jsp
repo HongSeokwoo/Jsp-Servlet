@@ -35,15 +35,19 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="961105134197-k7vhik09ob5mc90icittrtab6135e09r.apps.googleusercontent.com">
+	
 <title>Insert title here</title>
+
 </head>
 <body>
 
 	<h1><%= name %>님 안녕하세요.</h1> <br>
-	<form action="logout.jsp" method="post">
-		<input type="submit" value="로그아웃">&nbsp;&nbsp;&nbsp;
+	<form action="logout.jsp">
+		<input type="submit"  value="로그아웃">&nbsp;&nbsp;&nbsp;
 		<input type="button" value="정보수정"
-			   onclick="javascript:window.location='modify.jsp'">
+			   onclick="javascript:window.location='modify.jsp'">&nbsp;
 		<input type="button" value="회원탈퇴" onclick="javascript:window.location='delete.jsp'">	   
 	</form>
 	<h1>자유게시판</h1>
