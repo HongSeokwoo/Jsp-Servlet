@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.study.jsp.dto.MemberDto" %>
+<%@page import="com.study.jsp.dao.MemberDao" %>
+    <%
+    String name = (String)session.getAttribute("name");
+ 	String id = (String)session.getAttribute("id");
+ 	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +23,11 @@
 <body>
 
 
-		<table class="table table-dark" width="650" cellpadding="0" cellspacing="0" border="1">
+		<table width="650" cellpadding="0" cellspacing="0" border="1">
 			<form action="write.do" method="post">
 				<tr>
 					<td> 이름 </td>
-					<td> <input type="text" name="bName" size = "50"> </td>
+		
 				</tr>
 				<tr>
 					<td> 제목 </td>
@@ -30,16 +36,7 @@
 				<tr>
 					<td> 내용 </td>
 					<td> 
-						<textarea name="bContent" id="ir1" rows="10"></textarea> 
-						 	<script type="text/javascript">
-									var oEditors = [];
-									nhn.husky.EZCreator.createInIFrame({
-   		 							oAppRef: oEditors,
-   		 							elPlaceHolder: "ir1",
-    								sSkinURI: "./naver-editor/SmartEditor2Skin.html",
-    								fCreator: "createSEditor2"
-								});
-							</script>
+						<textarea name="bContent"  id="ir1" rows="10"></textarea> 
 					</td>
 				</tr>
 				

@@ -10,6 +10,7 @@
  
  	String name = (String)session.getAttribute("name");
  	String id = (String)session.getAttribute("id");
+
  %>
 <!DOCTYPE html>
 <html>

@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td>${content_view.bName}</td>
+				<td>${dto.bName}</td>
 			</tr>
 			<tr>
 				<td>내용</td>
