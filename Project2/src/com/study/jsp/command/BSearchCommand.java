@@ -16,28 +16,34 @@ public class BSearchCommand implements BCommand {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 	{
 		
-		int nPage = 1;
-		String bName = (String)request.getParameter("bName");
-		String bTitle = request.getParameter("bTitle");
-		String bContent = request.getParameter("bContent");
-		try {
-			String sPage = request.getParameter("page");
-			nPage = Integer.parseInt(sPage);
-		} catch (Exception e) {
-		}
+
 		
 		BDao dao = BDao.getInstance();
-		dao.search(bName,bContent,bTitle);
-		BPageInfo pinfo = dao.articlePage(nPage);
-		request.setAttribute("page", pinfo);
-		
-		nPage = pinfo.getCurPage();
-		
 		HttpSession session = null;
 		session = request.getSession();
-		session.setAttribute("cpage", nPage);
 		
-		ArrayList<BDto> dtos = dao.list(nPage);
-		request.setAttribute("slist", dtos);
+		String bTitle = null;
+		String bContent = null;
+		String bName = null;
+		String type = request.getParameter("type");
+		System.out.println(type);
+		if (type.equals("bName") ) {
+			bName = request.getParameter("value");
+
+		} else if (type.equals("bTitle")) {
+			bTitle = request.getParameter("value");
+			System.out.println(bTitle);
+		} else if (type.equals("bContent")) {
+			bContent = request.getParameter("value");
+
+		}
+		
+		ArrayList<BDto> dtos = 	dao.search(bName,bTitle,bContent);
+		
+		request.setAttribute("list", dtos);
 	}
+
+	
 }
+
+

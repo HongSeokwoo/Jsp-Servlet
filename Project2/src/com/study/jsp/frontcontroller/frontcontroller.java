@@ -107,7 +107,7 @@ public class frontcontroller extends HttpServlet {
 		} else if (com.equals("/search.do")) {
 			command = new BSearchCommand();
 			command.execute(request, response);
-			viewPage = "search_view.jsp";
+			viewPage = "list.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

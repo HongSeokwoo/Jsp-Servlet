@@ -96,6 +96,7 @@ public class BDao {
 				int bGroup = resultSet.getInt("bGroup");
 				int bStep = resultSet.getInt("bStep");
 				int bIndent = resultSet.getInt("bIndent");
+		
 				
 				
 				BDto dto = new BDto(bId, bName, bTitle, bContent, bDate,
@@ -115,7 +116,7 @@ public class BDao {
 		}
 		return dtos;
 	}
-
+	
 	public BDto contentView(String strID) {
 		upHit(strID);
 		
@@ -357,6 +358,7 @@ public class BDao {
 			con = dataSource.getConnection();
 			
 			String query = "select count(*) as total from mvc_board2";
+			
 			pstmt = con.prepareStatement(query);
 			resultSet = pstmt.executeQuery();
 			
@@ -408,18 +410,19 @@ public class BDao {
 	}
 	
 	//검색 메소드 작성.
-	public BDto search(String nStr, String cStr, String tStr) {
+	public ArrayList<BDto> search(String nStr, String tStr, String cStr) {
 		
-		ArrayList<BDto> dtos = new ArrayList<BDto>();
+	
 		BDto dto = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet resultSet = null;
+		ArrayList<BDto> dtos = new ArrayList();
 		
 		try {
 			con = dataSource.getConnection();
+		
 			if(nStr != null) {
-				System.out.println(nStr);
 				String query = "SELECT * FROM mvc_board2 WHERE bName LIKE '%' || ? || '%'";
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, nStr);
@@ -427,15 +430,15 @@ public class BDao {
 			} else if(cStr != null) {
 				String query = "select * from mvc_board2 where bContent LIKE '%' || ? || '%'";
 				pstmt = con.prepareStatement(query);
-				pstmt.setInt(1, Integer.parseInt(cStr));
+				pstmt.setString(1, cStr);
 				resultSet = pstmt.executeQuery();
 			} else if(tStr != null) {
 				String query = "select * from mvc_board2 where bTitle LIKE '%' || ? || '%'";
 				pstmt = con.prepareStatement(query);
-				pstmt.setInt(1, Integer.parseInt(tStr));
+				pstmt.setString(1, tStr);
 				resultSet = pstmt.executeQuery();
 			}
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				int bId = resultSet.getInt("bId");
 				String bName = resultSet.getString("bName");
 				String bTitle = resultSet.getString("bTitle");
@@ -445,11 +448,10 @@ public class BDao {
 				int bGroup = resultSet.getInt("bGroup");
 				int bStep = resultSet.getInt("bStep");
 				int bIndent = resultSet.getInt("bIndent");
-				
+				System.out.println(bTitle);
 				
 				dto = new BDto(bId, bName, bTitle, bContent, bDate,
 							   bHit, bGroup, bStep, bIndent);
-			
 				dtos.add(dto);
 			}
 		} catch (Exception e) {
@@ -463,6 +465,6 @@ public class BDao {
 				e2.printStackTrace();
 			}
 		}
-		return dto;
-	}
+		return dtos;
+	} 
 }

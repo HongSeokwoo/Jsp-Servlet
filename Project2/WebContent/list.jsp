@@ -155,13 +155,14 @@ function logout(event) {
 	</ul>
 	<!-- 게시물 검색 기능 -->
 	<body>
-	<form action="search.do" method="post">
-			<select name="sk">
-				<option value="bName" name="bName">작성자</option>
-				<option value="bContent" name="bContent">내용</option>
-				<option value="bTitle" name="bTitle">제목</option>
+
+<form action="search.do" method="post">
+			<select name="type">
+				<option value="bName" >작성자</option>
+				<option value="bContent">내용</option>
+				<option value="bTitle" >제목</option>
 			</select>
-			<input type="text" name="sv">
+			<input type="text" name="value">
 			<input type="submit" value="찾기">		
 	</form>
 
